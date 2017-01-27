@@ -1,29 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>From:</strong>
-  <%= @email.from %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @email.body %>
-</p>
-
-<p>
-  <strong>To:</strong>
-  <%= @email.to %>
-</p>
-
-<p>
-  <strong>Subject:</strong>
-  <%= @email.subject %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @email.user %>
-</p>
+<h1><%= @email.message_id %></h1>
 
 <%= link_to 'Edit', edit_email_path(@email) %> |
 <%= link_to 'Back', emails_path %>

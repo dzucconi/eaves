@@ -2,34 +2,13 @@
 
 <h1>Emails</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>From</th>
-      <th>Body</th>
-      <th>To</th>
-      <th>Subject</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @emails.each do |email| %>
-      <tr>
-        <td><%= email.from %></td>
-        <td><%= email.body %></td>
-        <td><%= email.to %></td>
-        <td><%= email.subject %></td>
-        <td><%= email.user %></td>
-        <td><%= link_to 'Show', email %></td>
-        <td><%= link_to 'Edit', edit_email_path(email) %></td>
-        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<% @emails.each do |email| %>
+  <p>
+    <%= email.message_id %><br>
+    <%= link_to 'Show', email %>
+    <%= link_to 'Edit', edit_email_path(email) %>
+    <%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </p>
+<% end %>
 
 <%= link_to 'New Email', new_email_path %>
