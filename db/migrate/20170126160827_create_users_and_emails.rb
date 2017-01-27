@@ -8,10 +8,6 @@ class CreateUsersAndEmails < ActiveRecord::Migration[5.0]
     end
 
     create_table :emails do |t|
-      t.string :from
-      t.text :body
-      t.string :to
-      t.string :subject
       t.string :message_id
       t.index :message_id, unique: true
       t.references :user, foreign_key: true

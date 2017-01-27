@@ -16,13 +16,11 @@ ActiveRecord::Schema.define(version: 20170126160827) do
   enable_extension "plpgsql"
 
   create_table "emails", force: :cascade do |t|
-    t.string   "from"
-    t.text     "body"
-    t.string   "to"
-    t.string   "subject"
+    t.string   "message_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_emails_on_message_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_emails_on_user_id", using: :btree
   end
 
@@ -30,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170126160827) do
     t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
   add_foreign_key "emails", "users"
