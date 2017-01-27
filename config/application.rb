@@ -13,10 +13,7 @@ Bundler.require(*Rails.groups)
 
 module Eaves
   class Application < Rails::Application
-    config.autoload_paths += %W(
-      #{config.root}/lib
-      #{config.root}/app/services
-    )
+    config.autoload_paths << "#{Rails.root}/app/services"
 
     config.action_view.field_error_proc = proc { |tag|
       "<span class='input--error'>#{tag}</span>".html_safe
