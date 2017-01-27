@@ -1,6 +1,21 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
 
+  def incoming
+    parser = EmailParser.new(params[:message_id])
+
+    @email = parser.persist
+
+    if @email.persisted?
+      format.html { redirect_to @email, notice: 'Email was successfully created.' }
+      format.json { render :show, status: :created, location: @email }
+    else
+      format.html { render :new }
+      format.json { render json: @email.errors, status: :unprocessable_entity }
+    end
+
+  end
+
   # GET /emails
   # GET /emails.json
   def index
@@ -69,6 +84,6 @@ class EmailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def email_params
-      params.require(:email).permit(:from, :body, :to, :subject, :user_id)
+      params.require(:email).permit(:message_id, :user_id)
     end
 end

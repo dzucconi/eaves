@@ -13,6 +13,21 @@ Bundler.require(*Rails.groups)
 
 module Eaves
   class Application < Rails::Application
+    config.autoload_paths += %W(
+      #{config.root}/lib
+      #{config.root}/app/services
+    )
+
+    config.action_view.field_error_proc = proc { |tag|
+      "<span class='input--error'>#{tag}</span>".html_safe
+    }
+
+    config.generators do |generate|
+      generate.stylesheets false
+      generate.javascripts false
+      generate.helpers false
+    end
+
     config.middleware.insert_before 0, 'Rack::Cors' do
       allow do
         origins '*'
