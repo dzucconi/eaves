@@ -2,5 +2,19 @@
 
 <h1><%= @email.message_id %></h1>
 
+<div class='message'>
+  <div class='message__from'>
+
+  </div>
+
+  <h2 class='message__subject'>
+    <%= @email.reader.subject %>
+  </h2>
+
+  <div class='message__body'>
+    <%= @email.reader.html_part.body.decoded.html_safe %>
+  </div>
+</div>
+
 <%= link_to 'Edit', edit_email_path(@email) %> |
 <%= link_to 'Back', emails_path %>
