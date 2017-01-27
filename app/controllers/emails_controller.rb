@@ -1,9 +1,10 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
 
+  skip_before_filter :verify_authenticity_token, only: [:incoming]
+
   def incoming
     parser = EmailReader.new(params[:message_id])
-
     @email = parser.persist
 
     if @email.persisted?
@@ -13,7 +14,6 @@ class EmailsController < ApplicationController
       format.html { render :new }
       format.json { render json: @email.errors, status: :unprocessable_entity }
     end
-
   end
 
   # GET /emails
