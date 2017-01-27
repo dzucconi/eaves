@@ -2,7 +2,7 @@ class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
 
   def incoming
-    parser = EmailParser.new(params[:message_id])
+    parser = EmailReader.new(params[:message_id])
 
     @email = parser.persist
 
