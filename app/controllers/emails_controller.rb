@@ -25,6 +25,7 @@ class EmailsController < ApplicationController
   # GET /emails/1
   # GET /emails/1.json
   def show
+    @envelope = @email.reader.envelope
   end
 
   # GET /emails/new

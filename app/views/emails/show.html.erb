@@ -1,20 +1,57 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
-<h1><%= @email.message_id %></h1>
+<nav class='primary-actions'>
+  <%= link_to 'Back', emails_path %>
+</nav>
 
-<div class='message'>
-  <div class='message__from'>
-
-  </div>
-
-  <h2 class='message__subject'>
-    <%= @email.reader.subject %>
-  </h2>
-
-  <div class='message__body'>
-    <%= @email.reader.html_part.body.decoded.html_safe %>
-  </div>
+<div class='secondary-actions'>
+  <%= link_to 'Edit', edit_email_path(@email) %>
+  <%= link_to 'Delete', @email, method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
 
-<%= link_to 'Edit', edit_email_path(@email) %> |
-<%= link_to 'Back', emails_path %>
+<div class='email'>
+  <table class='email__metadata'>
+    <tbody>
+      <tr>
+        <td>Message ID</td>
+        <td class='emphasize--primary'>
+          <%= @envelope.message_id %>
+        </td>
+      </tr>
+      <% if @envelope.in_reply_to.present? %>
+        <tr>
+          <td>In Reply To</td>
+          <td class='emphasize--secondary'>
+            <%= @envelope.in_reply_to %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>To</td>
+        <td><%= to_sentence @envelope.to %></td>
+      </tr>
+      <tr>
+        <td>From</td>
+        <td><%= to_sentence @envelope.from %></td>
+      </tr>
+      <tr>
+        <td>Subject</td>
+        <td><%= @envelope.subject %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class='email__body'>
+    <div class='email__body__rendered'>
+      <%= @envelope.html_part.body.decoded.html_safe %>
+    </div>
+  </div>
+
+  <div class='email__original'>
+    <h3>Original Message</h3>
+    <div class='email__original__rendered'>
+      <pre><%= @envelope.header %></pre>
+      <pre><%= @envelope.body %></pre>
+    </div>
+  </div>
+</div>

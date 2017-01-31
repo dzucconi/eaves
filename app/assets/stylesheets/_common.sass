@@ -1,0 +1,40 @@
+@import 'compass/css3'
+@import 'compass/css3/selection'
+@import 'compass/utilities/general/clearfix'
+
+$unit: 1em
+
+$gray-light: #ccc
+
+$green-light: #84D56A
+$green-regular: #3F9F21
+$green-dark: #175F00
+
+$blue-light: #5D74A8
+$blue-regular: #253E7E
+$blue-dark: #071A4B
+
+$red-light: #EF7788
+$red-regular: #B22538
+$red-dark: #6A000F
+
+$yellow-light: #FBD17D
+$yellow-regular: #BB8A27
+$yellow-dark: #704A00
+
+=margins($size: $unit)
+  margin: $size auto
+
+  &:first-child
+    margin-top: 0
+
+  &:last-child
+    margin-bottom: 0
+
+=font-smoothing($value: antialiased)
+  @if $value == antialiased
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+  @else
+    -webkit-font-smoothing: subpixel-antialiased
+    -moz-osx-font-smoothing: auto

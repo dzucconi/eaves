@@ -2,13 +2,10 @@
 
 <h1>Emails</h1>
 
-<% @emails.each do |email| %>
-  <p>
-    <%= email.message_id %><br>
-    <%= link_to 'Show', email %>
-    <%= link_to 'Edit', edit_email_path(email) %>
-    <%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </p>
-<% end %>
-
-<%= link_to 'New Email', new_email_path %>
+<div class='emails'>
+  <% @emails.each do |email| %>
+    <div class='emails__email'>
+      <%= link_to email.message_id, email %>
+    </div>
+  <% end %>
+</div>

@@ -1,4 +1,45 @@
+@import 'common'
+@import 'compass/reset'
+
+*
+  +selection($blue-regular, white)
+
+html
+  +box-sizing(border-box)
+
+*,
+*:before,
+*:after
+  box-sizing: inherit
+
 body
-  background-color: gray
+  background-color: white
+  color: black
   font-family: 'Helvetica Neue', 'helvetica', sans-serif
   -webkit-font-smoothing: antialiased
+
+a
+  color: $blue-regular
+  text-decoration: none
+
+h1,
+h2,
+h3
+  +margins($unit)
+  font-size: 125%
+  font-weight: normal
+  text-align: center
+
+table
+  +margins($unit)
+  border: 1px solid $gray-light
+  border-collapse: collapse
+
+td
+  padding: 1em
+  border-bottom: 1px solid $gray-light
+  text-align: left
+
+pre
+  overflow-y: hidden
+  overflow-x: auto

@@ -1,0 +1,55 @@
+@import 'common'
+
+.primary-actions,
+.secondary-actions
+  position: absolute
+  top: 0
+  padding: $unit 0
+  line-height: 1.5
+
+  > a
+    display: block
+    padding: 0 $unit
+
+.primary-actions
+  left: 0
+
+.secondary-actions
+  right: 0
+  text-align: right
+
+.emails
+  +margins($unit)
+  text-align: center
+
+  &__email
+    +margins($unit)
+
+.email
+  margin: $unit auto
+
+  &__metadata
+    +margins($unit)
+    width: 75%
+
+  &__body,
+  &__original
+    +margins($unit)
+    padding: ($unit / 2) 0
+
+    > h3
+      text-align: center
+
+    &__rendered
+      background-color: white
+      width: 75%
+      margin: $unit auto
+      padding: $unit
+
+  &__original
+    &__rendered
+      font-family: monospace
+
+.actions
+  margin: $unit * 2
+  text-align: center
