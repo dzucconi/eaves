@@ -27,4 +27,8 @@ class Email < ApplicationRecord
   def parsed
     @parsed ||= Mail.read_from_string(document)
   end
+
+  def to_s
+    message_id
+  end
 end
