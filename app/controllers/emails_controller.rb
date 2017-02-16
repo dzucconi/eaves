@@ -1,18 +1,11 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :verify_authenticity_token, only: [:incoming]
+  skip_before_filter :verify_authenticity_token, only: [:create]
 
-  def incoming
-    reader = EmailReader.new(params[:remote_message_id])
-    @email = EmailPersister.new(reader).persist
-
-    if @email.persisted?
-      format.html { redirect_to @email, notice: 'Email was successfully created.' }
-      format.json { render :show, status: :created, location: @email }
-    else
-      format.html { render :new }
-      format.json { render json: @email.errors, status: :unprocessable_entity }
-    end
+  # GET /emails/remote
+  # GET /emails/remote.json
+  def remote
+    @objects = EmailReader.bucket.objects
   end
 
   # GET /emails
@@ -38,10 +31,11 @@ class EmailsController < ApplicationController
   # POST /emails
   # POST /emails.json
   def create
-    @email = Email.new(email_params)
+    reader = EmailReader.new(email_params[:remote_message_id])
+    @email = EmailPersister.new(reader).persist
 
     respond_to do |format|
-      if @email.save
+      if @email.persisted?
         format.html { redirect_to @email, notice: 'Email was successfully created.' }
         format.json { render :show, status: :created, location: @email }
       else
@@ -83,6 +77,6 @@ class EmailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def email_params
-      params.require(:email).permit(:remote_message_id, :user_id)
+      params.require(:email).permit(:remote_message_id)
     end
 end
