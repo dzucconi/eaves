@@ -1,6 +1,12 @@
 require 'mail'
 
 class EmailReader
+  class << self
+    def bucket
+      @bucket ||= Aws::S3::Resource.new.bucket(ENV['AWS_S3_BUCKET'])
+    end
+  end
+
   attr_reader :remote_message_id
 
   def initialize(remote_message_id)
@@ -8,11 +14,7 @@ class EmailReader
   end
 
   def message
-    @message ||= Aws::S3::Resource
-      .new
-      .bucket(ENV['AWS_S3_BUCKET'])
-      .object(remote_message_id)
-      .get
+    @message ||= self.class.bucket.object(remote_message_id).get
   end
 
   def read
