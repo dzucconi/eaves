@@ -1,0 +1,48 @@
+@import 'common'
+
+.form
+  padding: $unit
+  margin-top: -$unit // Offset for hidden inputs
+
+  &--inline
+    display: inline
+    padding: 0
+    margin: 0
+
+.field,
+.submit
+  +margins($unit)
+
+.submit
+  width: 50%
+  padding-top: $unit
+  border-top: 1px solid $gray-light
+
+input[type='text'],
+textarea,
+select
+  +typography()
+
+label
+  display: block
+  margin-bottom: ($unit / 4)
+  font-size: 75%
+  color: $gray-light
+
+input[type='text'],
+textarea
+  display: block
+  width: 100%
+  padding: ($unit / 4) ($unit / 2)
+
+
+button,
+input[type='submit']
+  appearance: none
+  color: $blue-regular
+  background-color: transparent
+  font-family: inherit
+  font-size: inherit
+  border: none
+  cursor: pointer
+  padding: 0

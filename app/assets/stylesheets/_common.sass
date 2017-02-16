@@ -22,6 +22,8 @@ $yellow-light: #FBD17D
 $yellow-regular: #BB8A27
 $yellow-dark: #704A00
 
+$base-font-size: 16px
+
 =margins($size: $unit)
   margin: $size auto
 
@@ -38,3 +40,8 @@ $yellow-dark: #704A00
   @else
     -webkit-font-smoothing: subpixel-antialiased
     -moz-osx-font-smoothing: auto
+
+=typography()
+  +font-smoothing(antialiased)
+  font-family: 'Helvetica Neue', 'helvetica', sans-serif
+  font-size: $base-font-size
