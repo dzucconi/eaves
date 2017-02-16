@@ -1,11 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Emails</h1>
-
 <div class='emails'>
   <% @emails.each do |email| %>
-    <div class='emails__email'>
-      <%= link_to email.message_id, email %>
-    </div>
+    <%= link_to email, class: 'emails__email' do %>
+      <span class='emails__email__from'>
+        <%= to_sentence email.from %>
+      </span>
+      <span class='emails__email__subject'>
+        <%= email.subject %>
+      </span>
+      <span class='emails__email__date'>
+        <%= time_ago_in_words email.date %> ago
+      </span>
+    <% end %>
   <% end %>
 </div>

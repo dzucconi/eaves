@@ -1,11 +1,10 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
-
   skip_before_filter :verify_authenticity_token, only: [:incoming]
 
   def incoming
-    parser = EmailReader.new(params[:message_id])
-    @email = parser.persist
+    reader = EmailReader.new(params[:remote_message_id])
+    @email = EmailPersister.new(reader).persist
 
     if @email.persisted?
       format.html { redirect_to @email, notice: 'Email was successfully created.' }
@@ -25,7 +24,6 @@ class EmailsController < ApplicationController
   # GET /emails/1
   # GET /emails/1.json
   def show
-    @envelope = @email.reader.envelope
   end
 
   # GET /emails/new
@@ -85,6 +83,6 @@ class EmailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def email_params
-      params.require(:email).permit(:message_id, :user_id)
+      params.require(:email).permit(:remote_message_id, :user_id)
     end
 end

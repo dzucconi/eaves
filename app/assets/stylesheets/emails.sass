@@ -24,6 +24,23 @@
 
   &__email
     +margins($unit)
+    display: table
+    width: 100%
+    padding: 0 $unit
+
+    > span
+      display: table-cell
+
+    &__from,
+    &__subject
+      text-align: left
+    &__from
+      width: 25%
+    &__subject
+      width: 60%
+    &__date
+      width: 15%
+      text-align: right
 
 .email
   margin: $unit auto
