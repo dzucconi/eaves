@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users
   resources :emails do
     collection do
-      post 'incoming'
+      get 'remote'
     end
   end
 end
