@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126160827) do
+ActiveRecord::Schema.define(version: 20170215162359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,9 +18,18 @@ ActiveRecord::Schema.define(version: 20170126160827) do
   create_table "emails", force: :cascade do |t|
     t.string   "message_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.text     "document"
+    t.string   "remote_message_id"
+    t.string   "in_reply_to"
+    t.string   "to",                default: [],              array: true
+    t.string   "from",              default: [],              array: true
+    t.string   "subject"
+    t.datetime "date"
+    t.text     "message"
     t.index ["message_id"], name: "index_emails_on_message_id", unique: true, using: :btree
+    t.index ["remote_message_id"], name: "index_emails_on_remote_message_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_emails_on_user_id", using: :btree
   end
 
