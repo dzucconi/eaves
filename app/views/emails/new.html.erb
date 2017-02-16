@@ -1,5 +1,17 @@
-<h1>New Email</h1>
+<h1>
+  Import email
+</h1>
 
-<%= render 'form', email: @email %>
+<%= form_for(@email) do |f| %>
+  <%= render 'common/errors', resource: @email %>
 
-<%= link_to 'Back', emails_path %>
+  <div class='field'>
+    <%= f.text_field :remote_message_id, placeholder: 'remote_message_id', value: params[:remote_message_id] %>
+  </div>
+
+  <div class='actions'>
+    <%= f.submit 'Import' %>
+  </div>
+<% end %>
+
+<%= link_to 'Index', emails_path %>
