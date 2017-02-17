@@ -45,6 +45,6 @@ class Email < ApplicationRecord
   end
 
   def recipients
-    to.map { |email| User.find_by(email: email) }
+    to.map { |email| User.find_by(email: email) }.compact
   end
 end

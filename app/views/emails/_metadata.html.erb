@@ -6,6 +6,7 @@
         <%= email.message_id %>
       </td>
     </tr>
+
     <% if email.in_reply_to.present? %>
       <tr>
         <td>In Reply To</td>
@@ -14,14 +15,17 @@
         </td>
       </tr>
     <% end %>
+
     <tr>
       <td>To</td>
-      <td><%= to_sentence email.recipients.map { |u| link_to u, u } %></td>
+      <td><%= to_sentence email.recipients.map { |user| link_to user, user } %></td>
     </tr>
+
     <tr>
       <td>From</td>
       <td><%= link_to email.user, email.user %></td>
     </tr>
+
     <tr>
       <td>Subject</td>
       <td><%= email.subject %></td>
