@@ -2,7 +2,7 @@
   <% @emails.each do |email| %>
     <%= link_to email, class: 'emails__email' do %>
       <span class='emails__email__from'>
-        <%= to_sentence email.from %>
+        <%= email.user %>
       </span>
       <span class='emails__email__subject'>
         <%= email.subject %>

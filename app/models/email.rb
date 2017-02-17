@@ -43,4 +43,8 @@ class Email < ApplicationRecord
 
     MailExtract.parse reply
   end
+
+  def recipients
+    to.map { |email| User.find_by(email: email) }
+  end
 end
