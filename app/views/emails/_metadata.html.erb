@@ -1,0 +1,30 @@
+<table class='email__metadata'>
+  <tbody>
+    <tr>
+      <td>Message ID</td>
+      <td class='emphasize--primary'>
+        <%= email.message_id %>
+      </td>
+    </tr>
+    <% if email.in_reply_to.present? %>
+      <tr>
+        <td>In Reply To</td>
+        <td class='emphasize--secondary'>
+          <%= link_to email.in_reply_to, where_emails_path(message_id: email.in_reply_to) %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>To</td>
+      <td><%= to_sentence email.to %></td>
+    </tr>
+    <tr>
+      <td>From</td>
+      <td><%= to_sentence email.from %></td>
+    </tr>
+    <tr>
+      <td>Subject</td>
+      <td><%= email.subject %></td>
+    </tr>
+  </tbody>
+</table>

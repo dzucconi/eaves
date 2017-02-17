@@ -5,7 +5,8 @@
   position: absolute
   top: 0
 
-  > a
+  > a,
+  > span
     display: block
     padding: 0 $unit ($unit / 3) $unit
 
@@ -41,32 +42,20 @@
       text-align: right
 
 .email
+  width: 75%
   margin: $unit auto
 
-  &__message
-    width: 75%
+  &__message,
+  &__body
     min-height: 50vh
     margin: 0 auto
     padding: $unit
     border: 1px solid $gray-light
 
   &__metadata
+    width: 100%
     +margins($unit)
-    width: 75%
 
-  &__body,
-  &__original
-    +margins($unit)
-    padding: ($unit / 2) 0
-
-    > h3
-      text-align: center
-
-    &__rendered
-      background-color: white
-      width: 75%
-      margin: $unit auto
-      padding: $unit
 
   &__original
     &__rendered

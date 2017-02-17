@@ -1,0 +1,12 @@
+<%= render 'emails/actions/primary', email: @email %>
+<%= render 'emails/actions/secondary', email: @email %>
+
+<div class='email'>
+  <div class='email__original'>
+    <h3>Original Message</h3>
+    <div class='email__original__rendered'>
+      <pre><%= @email.parsed.header %></pre>
+      <pre><%= @email.parsed.body %></pre>
+    </div>
+  </div>
+</div>

@@ -1,65 +1,12 @@
-<nav class='primary-actions'>
-  <%= link_to 'Back', emails_path %>
-</nav>
-
-<div class='secondary-actions'>
-  <%= link_to 'Edit', edit_email_path(@email) %>
-  <%= link_to 'Delete', @email, method: :delete, data: { confirm: 'Are you sure?' } %>
-</div>
+<%= render 'emails/actions/primary', email: @email %>
+<%= render 'emails/actions/secondary', email: @email %>
 
 <div class='email'>
   <div class='email__message'>
     <div class='email__message__rendered'>
-      <%= simple_format @email.body %>
+      <%= simple_render @email.message || @email.body %>
     </div>
   </div>
 
-  <table class='email__metadata'>
-    <tbody>
-      <tr>
-        <td>Message ID</td>
-        <td class='emphasize--primary'>
-          <%= @email.message_id %>
-        </td>
-      </tr>
-      <% if @email.in_reply_to.present? %>
-        <tr>
-          <td>In Reply To</td>
-          <td class='emphasize--secondary'>
-            <%= @email.in_reply_to %>
-          </td>
-        </tr>
-      <% end %>
-      <tr>
-        <td>To</td>
-        <td><%= to_sentence @email.to %></td>
-      </tr>
-      <tr>
-        <td>From</td>
-        <td><%= to_sentence @email.from %></td>
-      </tr>
-      <tr>
-        <td>Subject</td>
-        <td><%= @email.subject %></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class='email__body'>
-    <div class='email__body__rendered'>
-      <% if @email.parsed.multipart? %>
-        <%= @email.parsed.html_part.body.decoded.html_safe %>
-      <% else %>
-        <%= simple_format @email.parsed.body.decoded %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class='email__original'>
-    <h3>Original Message</h3>
-    <div class='email__original__rendered'>
-      <pre><%= @email.parsed.header %></pre>
-      <pre><%= @email.parsed.body %></pre>
-    </div>
-  </div>
+  <%= render 'metadata', email: @email %>
 </div>

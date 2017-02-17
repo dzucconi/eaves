@@ -1,6 +1,13 @@
 class EmailsController < ApplicationController
-  before_action :set_email, only: [:show, :edit, :update, :destroy]
+  before_action :set_email, only: [:show, :original, :rendered, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token, only: [:create]
+
+  # GET /emails/where
+  # GET /emails/where
+  def where
+    @email = Email.find_by(params.permit(:message_id))
+    render :show
+  end
 
   # GET /emails/remote
   # GET /emails/remote.json
@@ -17,6 +24,16 @@ class EmailsController < ApplicationController
   # GET /emails/1
   # GET /emails/1.json
   def show
+  end
+
+  # GET /emails/1/original
+  # GET /emails/1/original.json
+  def original
+  end
+
+  # GET /emails/1/rendered
+  # GET /emails/1/rendered.json
+  def rendered
   end
 
   # GET /emails/new
@@ -64,19 +81,17 @@ class EmailsController < ApplicationController
   def destroy
     @email.destroy
     respond_to do |format|
-      format.html { redirect_to emails_url, notice: 'Email was successfully destroyed.' }
+      format.html { redirect_to emails_url, notice: 'Email was successfully deleted.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_email
       @email = Email.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def email_params
-      params.require(:email).permit(:remote_message_id)
+      params.require(:email).permit(:remote_message_id, :message)
     end
 end

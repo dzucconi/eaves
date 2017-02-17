@@ -1,6 +1,19 @@
-<h1>Editing <%= @email %></h1>
+<%= render 'emails/actions/primary', email: @email %>
+<%= render 'emails/actions/secondary', email: @email %>
 
-<%= render 'form', email: @email %>
+<div class='email'>
+  <h1>Editing <%= @email %></h1>
 
-<%= link_to 'Show', @email %> |
-<%= link_to 'Back', emails_path %>
+  <%= form_for(@email) do |f| %>
+    <%= render 'common/errors', resource: @email %>
+
+    <div class='field'>
+      <%= f.label :message %>
+      <%= f.text_area :message, rows: 8, value: @email.body %>
+    </div>
+
+    <div class='actions'>
+      <%= f.submit 'Save Changes' %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,7 @@
+<div class='secondary-actions'>
+  <%= link_or_span_to 'Show', @email %>
+  <%= link_or_span_to 'Original', original_email_path(@email) %>
+  <%= link_or_span_to 'Rendered', rendered_email_path(@email) %>
+  <%= link_or_span_to 'Edit', edit_email_path(@email) %>
+  <%= link_to 'Delete', @email, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>

@@ -1,0 +1,16 @@
+<%= render 'emails/actions/primary', email: @email %>
+<%= render 'emails/actions/secondary', email: @email %>
+
+<div class='email'>
+  <div class='email__body'>
+    <div class='email__body__rendered'>
+      <% if @email.parsed.multipart? %>
+        <%= @email.parsed.html_part.body.decoded.html_safe %>
+      <% else %>
+        <%= simple_render @email.parsed.body.decoded %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render 'metadata', email: @email %>
+</div>
