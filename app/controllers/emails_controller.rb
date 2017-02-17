@@ -5,8 +5,10 @@ class EmailsController < ApplicationController
   # GET /emails/where
   # GET /emails/where
   def where
-    @email = Email.find_by(params.permit(:message_id))
+    @email = Email.find_by!(params.permit(:message_id))
     render :show
+  rescue
+    render :missing, status: 404
   end
 
   # GET /emails/remote

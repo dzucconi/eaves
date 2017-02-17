@@ -1,12 +1,9 @@
 <%= render 'emails/actions/primary' %>
-<%= render 'emails/actions/secondary', email: @email %>
 
 <div class='email'>
   <div class='email__message'>
     <div class='email__message__rendered'>
-      <%= simple_render @email.message || @email.body %>
+      The requested message is missing.
     </div>
   </div>
-
-  <%= render 'metadata', email: @email %>
 </div>

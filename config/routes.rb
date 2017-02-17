@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     member do
       get 'original'
       get 'rendered'
-      get 'thread'
     end
 
     collection do
