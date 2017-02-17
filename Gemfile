@@ -18,6 +18,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'rack-cors', require: 'rack/cors'
 gem 'aws-sdk', '~> 2.0'
+gem 'email_reply_parser'
+gem 'mail_extract'
 
 group :development, :test do
   gem 'byebug', platform: :mri
