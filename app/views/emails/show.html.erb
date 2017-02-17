@@ -8,6 +8,12 @@
 </div>
 
 <div class='email'>
+  <div class='email__message'>
+    <div class='email__message__rendered'>
+      <%= simple_format @email.body %>
+    </div>
+  </div>
+
   <table class='email__metadata'>
     <tbody>
       <tr>
@@ -41,7 +47,11 @@
 
   <div class='email__body'>
     <div class='email__body__rendered'>
-      <%= @email.parsed.html_part.body.decoded.html_safe %>
+      <% if @email.parsed.multipart? %>
+        <%= @email.parsed.html_part.body.decoded.html_safe %>
+      <% else %>
+        <%= simple_format @email.parsed.body.decoded %>
+      <% end %>
     </div>
   </div>
 
