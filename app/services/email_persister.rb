@@ -19,7 +19,8 @@ class EmailPersister
       u.name = sender.display_name
     end
 
-    from.emails.find_or_create_by(remote_message_id: reader.remote_message_id) do |e|
+    # Create Email
+    email = from.emails.find_or_create_by(remote_message_id: reader.remote_message_id) do |e|
       # Complete email document
       e.document = reader.read
 
@@ -31,5 +32,28 @@ class EmailPersister
       e.subject = reader.parsed.subject
       e.date = reader.parsed.date
     end
+
+    # Extract and save Attachments
+    reader.parsed.attachments.each do |part|
+      content_type = part.content_type.match(/^(.*);/)[-1]
+      ext = part.content_type.match(/\/(.*);/)[-1]
+      file_name = "#{part.filename.parameterize}.#{ext}"
+      file_size = part.body.decoded.size
+
+      attachment = email.attachments.create(
+        file_name: file_name,
+        file_size: file_size,
+        content_type: content_type
+      )
+
+      begin
+        AttachmentPersister.persist(attachment.key, part.body.decoded)
+      rescue => e
+        puts "Unable to save data for #{file_name} because #{e.message}"
+        attachment.destroy
+      end
+    end
+
+    email
   end
 end

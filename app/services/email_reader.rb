@@ -3,7 +3,7 @@ require 'mail'
 class EmailReader
   class << self
     def bucket
-      @bucket ||= Aws::S3::Resource.new.bucket(ENV['AWS_S3_BUCKET'])
+      @bucket ||= Aws::S3::Resource.new.bucket(ENV['AWS_INCOMING_S3_BUCKET'])
     end
   end
 

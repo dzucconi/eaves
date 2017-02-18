@@ -1,0 +1,7 @@
+<div class='email__attachments'>
+  <% email.attachments.each do |attachment| %>
+    <div class='email__attachments__attachment'>
+      <%= link_to attachment.file_name, attachment.qualified %>
+    </div>
+  <% end %>
+</div>

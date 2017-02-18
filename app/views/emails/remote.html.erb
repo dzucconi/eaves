@@ -1,6 +1,9 @@
 <div class='emails'>
   <% @objects.each do |object| %>
     <%= link_to new_email_path(remote_message_id: object.key), class: 'emails__email' do %>
+      <span class='emails__email__from'>
+        <%= object.size %>
+      </span>
       <span class='emails__email__subject'>
         <%= object.key %>
       </span>

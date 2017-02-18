@@ -9,7 +9,7 @@
 
     <div class='field'>
       <%= f.label :message %>
-      <%= f.text_area :message, rows: 8, value: @email.body %>
+      <%= f.text_area :message, rows: 8, value: @email.message || @email.body %>
     </div>
 
     <div class='actions'>

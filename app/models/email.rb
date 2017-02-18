@@ -20,6 +20,7 @@ require 'mail'
 
 class Email < ApplicationRecord
   belongs_to :user
+  has_many :attachments
 
   validates :remote_message_id, presence: true, uniqueness: true
   validates :message_id, presence: true, uniqueness: true
