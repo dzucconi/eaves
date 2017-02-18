@@ -22,10 +22,12 @@
   text-align: center
 
   &__email
-    +margins($unit)
     display: table
     width: 100%
-    padding: 0 $unit
+    padding: ($unit / 2) $unit
+
+    &:active
+      background-color: $gray-highlight
 
     > span
       display: table-cell
